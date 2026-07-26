@@ -1,0 +1,13 @@
+{
+  "Garnet": {
+    "Port": 6379,
+    "Address": "127.0.0.1",
+    "ThreadPoolMinThreads": 16,
+    "EnableAOF": true,
+    "CheckpointDir": "data",
+    "CommitFrequencyMs": 0,
+    "PageSizeBits": 27,
+    "Recover": true
+  },
+  "SqliteLogPath": "logs/minet_logs.db"
+}
