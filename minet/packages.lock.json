@@ -395,6 +395,50 @@
         "resolved": "4.5.0",
         "contentHash": "wLBKzFnDCxP12VL9ANydSYhk59fC4cvOr9ypYQLPnAj48NQIhqnjdD2yhP8yEKyBJEjERWS9DisKL7rX5eU25Q=="
       }
+    },
+    "net10.0/win-x64": {
+      "Microsoft.Garnet": {
+        "type": "Direct",
+        "requested": "[2.1.0, )",
+        "resolved": "2.1.0",
+        "contentHash": "skZQBhSxl9hBSxExqwyyvKxeoiZ0CQ2T9gTjllLTskAq0v6jmdILuwAXzIu1FZPO7kEadRXPFDgXW0wOrCC45w==",
+        "dependencies": {
+          "Azure.Identity": "1.17.0",
+          "Azure.Storage.Blobs": "12.27.0",
+          "CommandLineParser": "2.9.1",
+          "KeraLua": "1.4.9",
+          "Microsoft.Extensions.Configuration.Binder": "10.0.5",
+          "Microsoft.Extensions.Logging": "10.0.5",
+          "Microsoft.Extensions.Logging.Configuration": "10.0.5",
+          "Microsoft.Extensions.Logging.Console": "10.0.5",
+          "Microsoft.Identity.Client": "4.76.0",
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "8.17.0",
+          "Microsoft.IdentityModel.Validators": "8.17.0",
+          "System.IdentityModel.Tokens.Jwt": "8.17.0",
+          "diskann-garnet": "4.0.0"
+        }
+      },
+      "SQLitePCLRaw.lib.e_sqlite3": {
+        "type": "Direct",
+        "requested": "[2.1.12, )",
+        "resolved": "2.1.12",
+        "contentHash": "fWi8Dbknuhgg72fWinIdjXVaqO1hHL4YBBwVLnr7e1c9TAZwJ0QE38j9syW1hwx6HaqEVTwI+O07WPdZn8Rp0w=="
+      },
+      "diskann-garnet": {
+        "type": "Transitive",
+        "resolved": "4.0.0",
+        "contentHash": "8Gvmbpz8yVRRK8axazAp2kgVW5NJGwf+3FkgxJB/V7UpP+DTXAlnyIOb9exW2rCHXQORRvzA0584kNvkFXxhwQ=="
+      },
+      "KeraLua": {
+        "type": "Transitive",
+        "resolved": "1.4.9",
+        "contentHash": "oxor0U3bFxMRLY9TQ9QjDiiX1ojH2se5ei1T0hsSovqE+gAkC7ucqvApWBoClHUPOOsp/taWtzbZ+ZfP0Q4Nsw=="
+      },
+      "System.Security.Cryptography.ProtectedData": {
+        "type": "Transitive",
+        "resolved": "4.5.0",
+        "contentHash": "wLBKzFnDCxP12VL9ANydSYhk59fC4cvOr9ypYQLPnAj48NQIhqnjdD2yhP8yEKyBJEjERWS9DisKL7rX5eU25Q=="
+      }
     }
   }
 }

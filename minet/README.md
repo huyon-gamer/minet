@@ -4,6 +4,16 @@
 
 minet本体は [MIT License](../LICENSE) で公開しています。NuGet依存関係を含む
 配布物には、[第三者ライセンス通知](../THIRD-PARTY-NOTICES.md) が同梱されます。
+Windows x64 向けリリースには [CycloneDX SBOM](../sbom/minet.cdx.json) も付属します。
+
+依存関係を更新する場合は、リポジトリ直下で次を実行し、生成物の差分を確認します。
+
+```powershell
+dotnet restore minet/minet.csproj
+./scripts/Generate-ThirdPartyNotices.ps1
+./scripts/Generate-Sbom.ps1
+git diff -- minet/packages.lock.json THIRD-PARTY-NOTICES.md sbom/minet.cdx.json
+```
 
 ## 概要
 

@@ -1,0 +1,11 @@
+{
+  "diskann-garnet/4.0.0": {
+    "licenseExpression": "MIT",
+    "copyright": "Copyright (c) Microsoft Corporation.",
+    "evidenceUrl": "https://github.com/microsoft/DiskANN/blob/main/LICENSE.txt",
+    "noticeUrl": "https://github.com/microsoft/DiskANN/blob/main/NOTICE.txt",
+    "noticeText": "This algorithm builds upon code for NSG (https://github.com/ZJULearning/nsg), commit 335e8e.\n\nCopyright (c) 2018 Cong Fu, Changxu Wang, Deng Cai\n\nThe NSG code is licensed under the MIT License reproduced above.",
+    "reviewedOn": "2026-08-05",
+    "reviewNotes": "The NuGet package has no license metadata or bundled LICENSE/NOTICE. The linked upstream DiskANN license and notice were reviewed manually. Review this record before changing the package version."
+  }
+}
