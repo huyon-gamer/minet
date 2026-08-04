@@ -5,6 +5,8 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <!-- リリース出力先を指定 -->
     <PublishDir>bin/Release/minet</PublishDir>
   </PropertyGroup>
@@ -20,6 +22,7 @@
 
   <ItemGroup>
     <None Update="minet.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <None Include="..\LICENSE" Link="LICENSE" CopyToPublishDirectory="PreserveNewest" />
     <None Include="..\THIRD-PARTY-NOTICES.md" Link="THIRD-PARTY-NOTICES.md" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
 

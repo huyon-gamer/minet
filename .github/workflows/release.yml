@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Restore locked dependencies
+        run: dotnet restore minet/minet.csproj --locked-mode
+
+      - name: Verify generated compliance artifacts
+        shell: pwsh
+        run: |
+          ./scripts/Generate-ThirdPartyNotices.ps1
+          ./scripts/Generate-Sbom.ps1
+          git diff --exit-code -- THIRD-PARTY-NOTICES.md minet/packages.lock.json sbom/minet.cdx.json
+
+      - name: Publish Windows x64 self-contained release
+        shell: pwsh
+        run: dotnet publish minet/minet.csproj -c Release -r win-x64 --self-contained true -p:PublishDir="$env:RUNNER_TEMP\minet-win-x64"
+
+      - name: Verify release notices
+        shell: pwsh
+        run: |
+          $publishDirectory = "$env:RUNNER_TEMP\minet-win-x64"
+          foreach ($file in 'LICENSE', 'THIRD-PARTY-NOTICES.md') {
+            if (-not (Test-Path (Join-Path $publishDirectory $file))) {
+              throw "Required release file is missing: $file"
+            }
+          }
+
+      - name: Package release
+        shell: pwsh
+        run: Compress-Archive -Path "$env:RUNNER_TEMP\minet-win-x64\*" -DestinationPath "$env:RUNNER_TEMP\minet-win-x64.zip"
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ${{ runner.temp }}/minet-win-x64.zip
+            sbom/minet.cdx.json
