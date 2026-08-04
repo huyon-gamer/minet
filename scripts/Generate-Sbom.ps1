@@ -7,7 +7,7 @@ param(
 $ErrorActionPreference = 'Stop'
 
 if (-not $OutputFile) {
-    $OutputFile = Join-Path $RepositoryRoot 'sbom\minet.cdx.json'
+    $OutputFile = Join-Path $RepositoryRoot 'sbom' 'minet.cdx.json'
 }
 
 $projectFile = Join-Path $RepositoryRoot 'minet\minet.csproj'
