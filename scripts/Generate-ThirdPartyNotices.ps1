@@ -229,6 +229,13 @@ END OF TERMS AND CONDITIONS
     }
 }
 
+function Test-IsMitLicenseText {
+    param([string]$LicenseText)
+
+    return $LicenseText -match 'Permission is hereby granted, free of charge, to any person obtaining a copy' -and
+        $LicenseText -match 'THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND'
+}
+
 $lock = Get-Content -Raw $LockFile | ConvertFrom-Json
 $overrides = @{}
 if (Test-Path $OverridesFile) {
@@ -318,6 +325,7 @@ $records = foreach ($package in $packages) {
             Version = $package.Version
             License = $licenseDeclaration
             LicenseText = $licenseText.Trim()
+            IsMit = Test-IsMitLicenseText -LicenseText $licenseText
             Copyright = if ($override) { $override.copyright } elseif ($copyrightNode) { $copyrightNode.InnerText.Trim() } else { $null }
             Source = $source
             Notices = @($noticeEntries | ForEach-Object { Get-ArchiveText -Archive $zip -Path $_.FullName }) + $(if ($override -and $override.noticeText) { $override.noticeText })
@@ -336,6 +344,8 @@ $builder = [System.Text.StringBuilder]::new()
 [void]$builder.AppendLine('`minet/packages.lock.json` and the exact restored NuGet package archives.')
 [void]$builder.AppendLine('Do not edit it manually.')
 
+$mitRecords = @($records | Where-Object IsMit)
+
 foreach ($record in $records) {
     [void]$builder.AppendLine()
     [void]$builder.AppendLine("## $($record.Id) $($record.Version)")
@@ -345,11 +355,16 @@ foreach ($record in $records) {
     [void]$builder.AppendLine("- Evidence: $($record.Source)")
     if ($record.Override) { [void]$builder.AppendLine("- Review note: $($record.Override.reviewNotes)") }
     [void]$builder.AppendLine()
-    [void]$builder.AppendLine('### License text')
-    [void]$builder.AppendLine()
-    [void]$builder.AppendLine('```text')
-    [void]$builder.AppendLine($record.LicenseText)
-    [void]$builder.AppendLine('```')
+    if ($record.IsMit) {
+        [void]$builder.AppendLine('- License text: see [MIT License](#mit-license) below.')
+    }
+    else {
+        [void]$builder.AppendLine('### License text')
+        [void]$builder.AppendLine()
+        [void]$builder.AppendLine('```text')
+        [void]$builder.AppendLine($record.LicenseText)
+        [void]$builder.AppendLine('```')
+    }
     foreach ($notice in $record.Notices) {
         [void]$builder.AppendLine()
         [void]$builder.AppendLine('### Notice')
@@ -359,6 +374,20 @@ foreach ($record in $records) {
         [void]$builder.AppendLine('```')
     }
 }
+
+[void]$builder.AppendLine()
+[void]$builder.AppendLine('## MIT License')
+[void]$builder.AppendLine()
+[void]$builder.AppendLine('The following packages are licensed under the MIT License. Their individual')
+[void]$builder.AppendLine('copyright notices and evidence are listed in the package sections above.')
+[void]$builder.AppendLine()
+foreach ($record in $mitRecords) {
+    [void]$builder.AppendLine("- $($record.Id) $($record.Version)")
+}
+[void]$builder.AppendLine()
+[void]$builder.AppendLine('```text')
+[void]$builder.AppendLine((Get-StandardLicenseText -Expression 'MIT').Trim())
+[void]$builder.AppendLine('```')
 
 $utf8NoBom = [System.Text.UTF8Encoding]::new($false)
 [System.IO.File]::WriteAllText($OutputFile, ($builder.ToString() -replace "`r`n", "`n"), $utf8NoBom)
