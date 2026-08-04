@@ -30,12 +30,14 @@ jobs:
 
       - name: Publish Windows x64 self-contained release
         shell: pwsh
-        run: dotnet publish minet/minet.csproj -c Release -r win-x64 --self-contained true -p:PublishDir="$env:RUNNER_TEMP\minet-win-x64"
+        run: |
+          $publishDirectory = Join-Path $env:RUNNER_TEMP 'minet-win-x64'
+          dotnet publish minet/minet.csproj -c Release -r win-x64 --self-contained true "-p:PublishDir=$publishDirectory"
 
       - name: Verify release notices
         shell: pwsh
         run: |
-          $publishDirectory = "$env:RUNNER_TEMP\minet-win-x64"
+          $publishDirectory = Join-Path $env:RUNNER_TEMP 'minet-win-x64'
           foreach ($file in 'LICENSE', 'THIRD-PARTY-NOTICES.md') {
             if (-not (Test-Path (Join-Path $publishDirectory $file))) {
               throw "Required release file is missing: $file"
@@ -44,7 +46,10 @@ jobs:
 
       - name: Package release
         shell: pwsh
-        run: Compress-Archive -Path "$env:RUNNER_TEMP\minet-win-x64\*" -DestinationPath "$env:RUNNER_TEMP\minet-win-x64.zip"
+        run: |
+          $publishDirectory = Join-Path $env:RUNNER_TEMP 'minet-win-x64'
+          $archivePath = Join-Path $env:RUNNER_TEMP 'minet-win-x64.zip'
+          Compress-Archive -Path (Join-Path $publishDirectory '*') -DestinationPath $archivePath
 
       - uses: softprops/action-gh-release@v2
         with:

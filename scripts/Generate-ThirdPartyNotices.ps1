@@ -1,16 +1,24 @@
 [CmdletBinding()]
 param(
-    [string]$RepositoryRoot = (Split-Path -Parent $PSScriptRoot),
+    [string]$RepositoryRoot,
     [string]$LockFile,
     [string]$OutputFile,
-    [string]$OverridesFile = (Join-Path $PSScriptRoot 'LicenseOverrides.json')
+    [string]$OverridesFile
 )
 
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
+if (-not $RepositoryRoot) {
+    $RepositoryRoot = Split-Path -Parent $PSScriptRoot
+}
+
+if (-not $OverridesFile) {
+    $OverridesFile = Join-Path $PSScriptRoot 'LicenseOverrides.json'
+}
+
 if (-not $LockFile) {
-    $LockFile = Join-Path $RepositoryRoot 'minet' 'packages.lock.json'
+    $LockFile = Join-Path (Join-Path $RepositoryRoot 'minet') 'packages.lock.json'
 }
 
 if (-not $OutputFile) {
@@ -266,7 +274,7 @@ $packages = $packages | Sort-Object Id, Version -Unique
 $records = foreach ($package in $packages) {
     $override = $null
     $packageKey = "$($package.Id)/$($package.Version)"
-    $packageDirectory = Join-Path $globalPackagesPath "$($package.Id.ToLowerInvariant())\$($package.Version)"
+    $packageDirectory = [System.IO.Path]::Combine($globalPackagesPath, $package.Id.ToLowerInvariant(), $package.Version)
     $archive = Get-ChildItem -Path $packageDirectory -Filter '*.nupkg' -File | Select-Object -First 1
     if (-not $archive) {
         throw "NuGet archive is unavailable for $packageKey. Run 'dotnet restore' before generating notices."

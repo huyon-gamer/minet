@@ -1764,8 +1764,8 @@
                              "ref":  "pkg:nuget/Azure.Identity@1.17.0",
                              "dependsOn":  [
                                                "pkg:nuget/Azure.Core@1.50.0",
-                                               "pkg:nuget/Microsoft.Identity.Client@4.76.0",
-                                               "pkg:nuget/Microsoft.Identity.Client.Extensions.Msal@4.76.0"
+                                               "pkg:nuget/Microsoft.Identity.Client.Extensions.Msal@4.76.0",
+                                               "pkg:nuget/Microsoft.Identity.Client@4.76.0"
                                            ]
                          },
                          {
@@ -1829,15 +1829,15 @@
                          {
                              "ref":  "pkg:nuget/Microsoft.Extensions.Configuration.Binder@10.0.10",
                              "dependsOn":  [
-                                               "pkg:nuget/Microsoft.Extensions.Configuration@10.0.10",
-                                               "pkg:nuget/Microsoft.Extensions.Configuration.Abstractions@10.0.10"
+                                               "pkg:nuget/Microsoft.Extensions.Configuration.Abstractions@10.0.10",
+                                               "pkg:nuget/Microsoft.Extensions.Configuration@10.0.10"
                                            ]
                          },
                          {
                              "ref":  "pkg:nuget/Microsoft.Extensions.Configuration.FileExtensions@10.0.10",
                              "dependsOn":  [
-                                               "pkg:nuget/Microsoft.Extensions.Configuration@10.0.10",
                                                "pkg:nuget/Microsoft.Extensions.Configuration.Abstractions@10.0.10",
+                                               "pkg:nuget/Microsoft.Extensions.Configuration@10.0.10",
                                                "pkg:nuget/Microsoft.Extensions.FileProviders.Abstractions@10.0.10",
                                                "pkg:nuget/Microsoft.Extensions.FileProviders.Physical@10.0.10",
                                                "pkg:nuget/Microsoft.Extensions.Primitives@10.0.10"
@@ -1846,9 +1846,9 @@
                          {
                              "ref":  "pkg:nuget/Microsoft.Extensions.Configuration.Json@10.0.10",
                              "dependsOn":  [
-                                               "pkg:nuget/Microsoft.Extensions.Configuration@10.0.10",
                                                "pkg:nuget/Microsoft.Extensions.Configuration.Abstractions@10.0.10",
                                                "pkg:nuget/Microsoft.Extensions.Configuration.FileExtensions@10.0.10",
+                                               "pkg:nuget/Microsoft.Extensions.Configuration@10.0.10",
                                                "pkg:nuget/Microsoft.Extensions.FileProviders.Abstractions@10.0.10"
                                            ]
                          },
@@ -1900,23 +1900,23 @@
                          {
                              "ref":  "pkg:nuget/Microsoft.Extensions.Logging.Configuration@10.0.5",
                              "dependsOn":  [
-                                               "pkg:nuget/Microsoft.Extensions.Configuration@10.0.10",
                                                "pkg:nuget/Microsoft.Extensions.Configuration.Abstractions@10.0.10",
                                                "pkg:nuget/Microsoft.Extensions.Configuration.Binder@10.0.10",
+                                               "pkg:nuget/Microsoft.Extensions.Configuration@10.0.10",
                                                "pkg:nuget/Microsoft.Extensions.DependencyInjection.Abstractions@10.0.5",
-                                               "pkg:nuget/Microsoft.Extensions.Logging@10.0.5",
                                                "pkg:nuget/Microsoft.Extensions.Logging.Abstractions@10.0.5",
-                                               "pkg:nuget/Microsoft.Extensions.Options@10.0.5",
-                                               "pkg:nuget/Microsoft.Extensions.Options.ConfigurationExtensions@10.0.5"
+                                               "pkg:nuget/Microsoft.Extensions.Logging@10.0.5",
+                                               "pkg:nuget/Microsoft.Extensions.Options.ConfigurationExtensions@10.0.5",
+                                               "pkg:nuget/Microsoft.Extensions.Options@10.0.5"
                                            ]
                          },
                          {
                              "ref":  "pkg:nuget/Microsoft.Extensions.Logging.Console@10.0.5",
                              "dependsOn":  [
                                                "pkg:nuget/Microsoft.Extensions.DependencyInjection.Abstractions@10.0.5",
-                                               "pkg:nuget/Microsoft.Extensions.Logging@10.0.5",
                                                "pkg:nuget/Microsoft.Extensions.Logging.Abstractions@10.0.5",
                                                "pkg:nuget/Microsoft.Extensions.Logging.Configuration@10.0.5",
+                                               "pkg:nuget/Microsoft.Extensions.Logging@10.0.5",
                                                "pkg:nuget/Microsoft.Extensions.Options@10.0.5"
                                            ]
                          },
@@ -1957,16 +1957,16 @@
                                                "pkg:nuget/Azure.Identity@1.17.0",
                                                "pkg:nuget/Azure.Storage.Blobs@12.27.0",
                                                "pkg:nuget/CommandLineParser@2.9.1",
+                                               "pkg:nuget/diskann-garnet@4.0.0",
                                                "pkg:nuget/KeraLua@1.4.9",
                                                "pkg:nuget/Microsoft.Extensions.Configuration.Binder@10.0.10",
-                                               "pkg:nuget/Microsoft.Extensions.Logging@10.0.5",
                                                "pkg:nuget/Microsoft.Extensions.Logging.Configuration@10.0.5",
                                                "pkg:nuget/Microsoft.Extensions.Logging.Console@10.0.5",
+                                               "pkg:nuget/Microsoft.Extensions.Logging@10.0.5",
                                                "pkg:nuget/Microsoft.Identity.Client@4.76.0",
                                                "pkg:nuget/Microsoft.IdentityModel.Protocols.OpenIdConnect@8.17.0",
                                                "pkg:nuget/Microsoft.IdentityModel.Validators@8.17.0",
-                                               "pkg:nuget/System.IdentityModel.Tokens.Jwt@8.17.0",
-                                               "pkg:nuget/diskann-garnet@4.0.0"
+                                               "pkg:nuget/System.IdentityModel.Tokens.Jwt@8.17.0"
                                            ]
                          },
                          {
@@ -2023,8 +2023,8 @@
                          {
                              "ref":  "pkg:nuget/Microsoft.IdentityModel.Validators@8.17.0",
                              "dependsOn":  [
-                                               "pkg:nuget/Microsoft.IdentityModel.Protocols@8.17.0",
                                                "pkg:nuget/Microsoft.IdentityModel.Protocols.OpenIdConnect@8.17.0",
+                                               "pkg:nuget/Microsoft.IdentityModel.Protocols@8.17.0",
                                                "pkg:nuget/Microsoft.IdentityModel.Tokens@8.17.0",
                                                "pkg:nuget/System.IdentityModel.Tokens.Jwt@8.17.0"
                                            ]
