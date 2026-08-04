@@ -1,7 +1,8 @@
 [CmdletBinding()]
 param(
     [string]$RepositoryRoot,
-    [string]$OutputFile
+    [string]$OutputFile,
+    [string]$Version
 )
 
 $ErrorActionPreference = 'Stop'
@@ -18,6 +19,15 @@ $projectFile = Join-Path (Join-Path $RepositoryRoot 'minet') 'minet.csproj'
 $outputDirectory = Split-Path -Parent $OutputFile
 New-Item -ItemType Directory -Force -Path $outputDirectory | Out-Null
 
+if (-not $Version) {
+    [xml]$project = Get-Content -Raw -Encoding UTF8 $projectFile
+    $Version = [string]$project.Project.PropertyGroup.Version | Where-Object { $_ } | Select-Object -First 1
+}
+
+if (-not $Version) {
+    throw "Project version is missing from $projectFile."
+}
+
 Push-Location $RepositoryRoot
 try {
     dotnet tool restore
@@ -32,7 +42,7 @@ New-Item -ItemType Directory -Force -Path $temporaryOutput | Out-Null
 try {
     Push-Location $RepositoryRoot
     try {
-        dotnet tool run dotnet-CycloneDX -- $projectFile --framework net10.0 --runtime win-x64 --output $temporaryOutput --filename minet.cdx.json --output-format Json --no-serial-number --set-name minet --set-version 1.0.0 --set-type Application
+        dotnet tool run dotnet-CycloneDX -- $projectFile --framework net10.0 --runtime win-x64 --output $temporaryOutput --filename minet.cdx.json --output-format Json --no-serial-number --set-name minet --set-version $Version --set-type Application
     }
     finally {
         Pop-Location

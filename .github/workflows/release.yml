@@ -31,8 +31,15 @@ jobs:
       - name: Publish Windows x64 self-contained release
         shell: pwsh
         run: |
+          $version = $env:GITHUB_REF_NAME -replace '^v', ''
           $publishDirectory = Join-Path $env:RUNNER_TEMP 'minet-win-x64'
-          dotnet publish minet/minet.csproj -c Release -r win-x64 --self-contained true "-p:PublishDir=$publishDirectory"
+          dotnet publish minet/minet.csproj -c Release -r win-x64 --self-contained true "-p:Version=$version" "-p:PublishDir=$publishDirectory"
+
+      - name: Generate release SBOM
+        shell: pwsh
+        run: |
+          $version = $env:GITHUB_REF_NAME -replace '^v', ''
+          ./scripts/Generate-Sbom.ps1 -Version $version
 
       - name: Verify release notices
         shell: pwsh
