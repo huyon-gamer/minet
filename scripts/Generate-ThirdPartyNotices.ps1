@@ -10,7 +10,7 @@ $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 if (-not $LockFile) {
-    $LockFile = Join-Path $RepositoryRoot 'minet\packages.lock.json'
+    $LockFile = Join-Path $RepositoryRoot 'minet' 'packages.lock.json'
 }
 
 if (-not $OutputFile) {
