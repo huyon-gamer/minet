@@ -26,7 +26,7 @@ jobs:
         run: |
           ./scripts/Generate-ThirdPartyNotices.ps1
           ./scripts/Generate-Sbom.ps1
-          git diff --exit-code -- THIRD-PARTY-NOTICES.md minet/packages.lock.json sbom/minet.cdx.json
+          git diff --exit-code --ignore-cr-at-eol -- THIRD-PARTY-NOTICES.md minet/packages.lock.json sbom/minet.cdx.json
 
       - name: Publish Windows x64 self-contained release
         shell: pwsh

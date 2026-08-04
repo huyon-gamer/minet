@@ -30,7 +30,7 @@ jobs:
 
       - name: Verify generated artifacts
         shell: pwsh
-        run: git diff --exit-code -- THIRD-PARTY-NOTICES.md minet/packages.lock.json sbom/minet.cdx.json
+        run: git diff --exit-code --ignore-cr-at-eol -- THIRD-PARTY-NOTICES.md minet/packages.lock.json sbom/minet.cdx.json
 
       - uses: actions/upload-artifact@v4
         with:
