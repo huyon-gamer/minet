@@ -57,7 +57,7 @@ try {
     if ($sbom.dependencies) {
         $sbom.dependencies = @($sbom.dependencies | Sort-Object -Property ref)
     }
-    $json = $sbom | ConvertTo-Json -Depth 100
+    $json = $sbom | ConvertTo-Json -Depth 100 -Compress
     [System.IO.File]::WriteAllText($OutputFile, (($json -replace "`r`n", "`n") + "`n"), [System.Text.UTF8Encoding]::new($false))
 }
 finally {
